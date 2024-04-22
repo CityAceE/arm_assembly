@@ -47,13 +47,11 @@ else
 	org	0x8000
 end if
 
-if model <> 0
 ; Включение невыровненного доступа к памяти (LDR)
 	mrc	p15, 0, r0, c1, c0, 0	; read SCTLR
 	bic	r0, r0, 2		; A (no unaligned access fault)
 	orr	r0, 0x00400000		; U (v6 unaligned access model)
 	mcr	p15, 0, r0, c1, c0, 0	; write SCTLR
-end if
 
 if model = 2
 ; Глушим все ядра кроме одного
